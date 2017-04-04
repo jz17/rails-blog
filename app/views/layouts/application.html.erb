@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Blog</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+ <% if alert %>
+ <nav>
+    <p class="alert bg-warning"><%= alert %></p>
+  <% end %>
+  <% if !current_page?(root_url) %>
+   <nav class ="nav navbar-inverse"></nav>
+   <% if user_signed_in? %>
+    <div class="pull-right white">Logged in as <strong><%= current_user.email %></strong>.</div>
+    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'btn btn-info navbar-btn' %> 
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-danger navbar-btn'  %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path, :class => 'btn btn-success navbar-bt'  %> 
+    <%= link_to "Login", new_user_session_path, :class => 'btn btn-primary navbar-btn'  %>
+  <% end %>
+    <%= link_to "Home", root_path, :class => 'btn btn-default navbar-btn'  %>
+ </nav>
+ <%end%>
+  
+<%= yield %>
+
+</body>
+</html>

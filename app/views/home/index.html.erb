@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="iso-8859-7">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <div class="background-image">
+    <header>
+      <nav class="navigation-bar">
+        <ul class="navigation-items">
+          <li id="about-list-item"><a href="#about">About</a></li>
+          <li id="contact-list-item"><a href="#contact">Contact</a></li>
+          <li id="blog-list-item"><%= link_to 'Blog', posts_path %></li>
+        </ul>
+      </nav>
+    </header>
+    <body>
+      <div class ="first_section">
+        <h1 class="title-1">Hi, I'm Jodie</h1>
+        <h2 class="title-2">Welcome to my website</h2>
+      </div>
+    </div>
+      <div class="container">
+        <div class="second_section">
+          <div id="about">
+            <h2 class="about-title">About Me</h2>
+          </div>
+          <div class="skills_passions_container">
+            <div class="skills">
+              <h3 class="skills_title">My skills</h3>
+              <ul class="skills-list">
+                <li id="skill-1">Skill 1</li>
+                <li id="skill-2">Skill 2</li>
+                <li id="skill-3">Skill 3</li>
+                <li id="skill-4">Skill 4</li>
+              </ul>
+            </div>
+            <div class="passions">
+              <h3 class="passions_title">My Passions</h3>
+              <ul class="passions-list">
+                <li id="passion-1">Passion 1</li>
+                <li id="passion-2">Passion 2</li>
+                <li id="passion-3">Passion 3</li>
+                <li id="passion-4">Passion 4</li>
+              </ul>
+            </div>
+        </div>
+    </div>
+      <hr>
+      <!--<div id="contact">-->
+      <!--  <h2 class="contact-title">Contact Me</h2>-->
+      <!--  <form id="contact_me">-->
+      <!--    <div>-->
+      <!--      <input required="required" type="text" value="Name"/>-->
+      <!--    </div>-->
+      <!--    <div>-->
+      <!--      <input required="required" type="email" value="Email"/>-->
+      <!--    </div>-->
+      <!--    <div>-->
+      <!--      <textarea>Message</textarea>-->
+      <!--    </div>-->
+      <!--    <div>-->
+      <!--      <input class="submit-button" required="required" type="submit" value="Submit"/>-->
+      <!--    </div>-->
+      <!--</div>-->
+  <div id="contact">
+    <h2 class="contact-title">Contact Me</h2>
+    <form id="contact_me" action="https://formspree.io/jzizzle518@gmail.com" method="POST">
+    <input required="required" type="text" name="name" placeholder="Your name"/>
+    <input required="required" type="email" name="_replyto" placeholder="Your email">
+    <textarea required="required" placeholder="I'd love to hear from you - send me a message!"></textarea>
+    <input class="submit-button" type="submit" value="Send">
+    </form>
+  </div>
+    </div>
+    <footer>
+      <div class="copyright">
+      <p>Copyright (c) 2016 Copyright {Your Name} All Rights Reserved.</p>
+      </div>
+    </footer>
+    <script>
+      var title = $('.title-1');
+      title.text("Hello")
+      title.css({color: "green", fontsize: "40px"})
+      
+      function changeTitleColor(){
+        var randomColor = getRandomColor();
+        title.css({color: randomColor});
+      }
+      
+      function getRandomColor(){
+        return "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+      }
+      
+      $(".background-image").click(changeTitleColor);
+      
+      $.ajax({
+        url: 'api/v1/weather',
+        type: 'GET',
+        
+        contentType: 'application/json; charset=utf-8',
+        success: function (response) {
+        var summary = (response.currently.summary);
+        var temp = (response.currently.temperature);
+        var subTitle = $('.title-2');
+        subTitle.text("It is " + temp + " degrees and " + summary.toLowerCase() + ".")
+      },
+        error: function () {
+        console.log(response);
+      }
+  }); 
+      
+    </script>
+     </body>
+</html>
+
+<script>
+  $(".favorite").click(handleFavoriteClicked);
+  
+  function handleFavoriteClicked(){
+    console.log("hello?")
+    $(this).removeClass("glyphicon-star-empty");
+    $(this).addClass("glyphicon-star");
+  }
+</script>
